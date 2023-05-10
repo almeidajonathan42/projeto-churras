@@ -2,9 +2,6 @@ import logo from "../assets/logo.svg";
 import InputField from "../components/InputField";
 
 function Login() {
-
-
-
   return (
     <div
       style={{
@@ -13,7 +10,7 @@ function Login() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        zIndex: "10"
+        zIndex: "10",
       }}
     >
       <h1> Agenda de Churras </h1>
@@ -26,20 +23,22 @@ function Login() {
           alignItems: "center",
         }}
       >
-        <InputField />
+        <InputField label="Login" placeholder="e-mail" />
 
-        <InputField />
+        <InputField label="Senha" placeholder="senha" />
 
         <input
           style={{
             color: "#FFFFFF",
+            font: "Raleway",
+            fontSize: "18px",
             fontWeight: "700",
             width: "282px",
             height: "50px",
             background: "#000000",
             boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.06)",
             borderRadius: "18px",
-            marginTop: "74px"
+            marginTop: "74px",
           }}
           type="submit"
           value="Entrar"

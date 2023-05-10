@@ -1,6 +1,6 @@
 import "./InputField.css";
 
-function InputField() {
+function InputField(props) {
   return (
     <div
       style={{
@@ -19,7 +19,7 @@ function InputField() {
           marginBottom: "16px",
         }}
       >
-        Login
+        {props.label}
       </label>
       <input
         style={{
@@ -36,7 +36,7 @@ function InputField() {
         }}
         type="text"
         name="login"
-        placeholder="e-mail"
+        placeholder={props.placeholder}
       />
     </div>
   );
