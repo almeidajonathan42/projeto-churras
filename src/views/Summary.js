@@ -1,4 +1,4 @@
-import logo from "../assets/logo.svg";
+
 import people from "../assets/people.svg";
 import money from "../assets/money.svg";
 import bbqIconCircle from "../assets/bbqIconCircle.svg";
@@ -69,41 +69,27 @@ function Summary() {
         width: "100vw",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
         zIndex: "10",
       }}
     >
-      <h1
-        style={{
-          zIndex: "20",
-          marginBottom: "48px",
-        }}
-      >
-        Agenda de Churras
-      </h1>
-
-      {/* <div
-        style={{
-          height: "70vh",
-          width: "100vw",
-          zIndex: "10",
-          background: "#FAFAFA",
-          position: "absolute",
-          bottom: "0",
-          zIndex: "15",
-        }}
-      ></div> */}
-
       <div
         style={{
-          background: "red",
-          width: "calc(100% - 48px)",
+          width: "100%",
+          height: "30%",
+          zIndex: "10",
+        }}
+      >
+
+      </div>
+      <div
+        style={{
+          background: "#FAFAFA",
+          width: "100%",
+          height: "70%",
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "center",
-          alignItems: "center",
           zIndex: "10",
         }}
       >
@@ -119,6 +105,7 @@ function Summary() {
                 padding: "21px 24px 32px 24px",
                 margin: "12px",
                 position: "relative",
+                bottom: "70px",
               }}
             >
               <p
@@ -211,6 +198,7 @@ function Summary() {
             padding: "21px 24px 32px 24px",
             margin: "12px 0 12px 12px",
             position: "relative",
+            bottom: "70px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -236,12 +224,6 @@ function Summary() {
           </p>
         </div>
       </div>
-
-      <img
-        src={logo}
-        style={{ height: "50px", position: "absolute", bottom: "28px" }}
-        alt="trinca logo"
-      />
     </div>
   );
 }
