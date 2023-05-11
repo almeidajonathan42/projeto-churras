@@ -13,8 +13,6 @@ function Login() {
         zIndex: "10",
       }}
     >
-      <h1> Agenda de Churras </h1>
-
       <form
         style={{
           display: "flex",
@@ -44,12 +42,6 @@ function Login() {
           value="Entrar"
         />
       </form>
-
-      <img
-        src={logo}
-        style={{ height: "50px", position: "absolute", bottom: "28px" }}
-        alt="trinca logo"
-      />
     </div>
   );
 }
