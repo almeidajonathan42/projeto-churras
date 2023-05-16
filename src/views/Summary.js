@@ -1,5 +1,3 @@
-import people from "../assets/people.svg";
-import money from "../assets/money.svg";
 import bbqIconCircle from "../assets/bbqIconCircle.svg";
 import EventSummaryBlock from "../components/EventSummaryBlock";
 import { useState } from "react";
