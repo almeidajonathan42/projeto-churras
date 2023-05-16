@@ -1,13 +1,13 @@
-
 import people from "../assets/people.svg";
 import money from "../assets/money.svg";
 import bbqIconCircle from "../assets/bbqIconCircle.svg";
+import EventSummaryBlock from "../components/EventSummaryBlock";
 import { useState } from "react";
 
 function Summary() {
   const [eventList, setEventList] = useState([
     {
-      title: "Niver do Gui",
+      title: "Niver do Gui 2",
       date: "01/12",
       info: "Uma festa para o Guilherme",
       people: [
@@ -15,6 +15,12 @@ function Summary() {
           name: "Alice",
           valueWithDrink: 20,
           valueWithoutDrink: 30,
+          checked: false,
+        },
+        {
+          name: "Beto",
+          valueWithDrink: 999,
+          valueWithoutDrink: 1000,
           checked: false,
         },
         {
@@ -57,6 +63,7 @@ function Summary() {
       ],
     },
   ]);
+  const [showNewEventDialog, setShowNewEventDialog] = useState(false);
 
   const getSumOfValuesWithoutDrink = function (peopleArray) {
     return "100";
@@ -94,98 +101,7 @@ function Summary() {
         }}
       >
         {eventList.map((event) => {
-          return (
-            <div
-              style={{
-                width: "282px",
-                height: "192px",
-                background: "#FFFFFF",
-                boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.06)",
-                borderRadius: "2px",
-                padding: "21px 24px 32px 24px",
-                margin: "12px",
-                position: "relative",
-                bottom: "70px",
-              }}
-            >
-              <p
-                style={{
-                  font: "Raleway",
-                  fontWeight: "800",
-                  fontSize: "28px",
-                  color: "#000000",
-                  margin: 0,
-                }}
-              >
-                {event.date}
-              </p>
-              <p
-                style={{
-                  font: "Raleway",
-                  fontWeight: "700",
-                  fontSize: "21px",
-                  color: "rgba(0, 0, 0, 0.8)",
-                  margin: 0,
-                }}
-              >
-                {event.title}
-              </p>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  position: "absolute",
-                  bottom: "32px",
-                  left: "24px",
-                }}
-              >
-                <img
-                  src={people}
-                  style={{ height: "15.3px", marginRight: "12px" }}
-                  alt="people logo"
-                />
-                <p
-                  style={{
-                    margin: 0,
-                    font: "Raleway",
-                    fontWeight: "500",
-                    fontSize: "21px",
-                  }}
-                >
-                  {event.people.length}
-                </p>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  position: "absolute",
-                  bottom: "32px",
-                  right: "24px",
-                }}
-              >
-                <img
-                  src={money}
-                  style={{ height: "20px", marginRight: "7px" }}
-                  alt="money logo"
-                />
-                <p
-                  style={{
-                    margin: 0,
-                    font: "Raleway",
-                    fontWeight: "500",
-                    fontSize: "21px",
-                  }}
-                >
-                  R${getSumOfValuesWithoutDrink(event.people)}
-                </p>
-              </div>
-            </div>
-          );
+          return <EventSummaryBlock date={event.date} title={event.title} numberOfPeople={event.people.length} value={getSumOfValuesWithoutDrink(event.people)}/>
         })}
 
         <div
@@ -203,7 +119,9 @@ function Summary() {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
+            cursor: "pointer",
           }}
+          onClick={() => setShowNewEventDialog(true)}
         >
           <img
             src={bbqIconCircle}
@@ -224,6 +142,7 @@ function Summary() {
           </p>
         </div>
       </div>
+      )}
     </div>
   );
 }
