@@ -6,7 +6,6 @@ input[type=checkbox] {
     background-color: #fff;
     /* Not removed via appearance */
     margin: 0;
-    cursor: pointer;
     content: "";
     width: 25px;
     height: 25px;

@@ -1,6 +1,7 @@
 import people from "../assets/people.svg";
 import money from "../assets/money.svg";
-import bbqIconCircle from "../assets/bbqIconCircle.svg";
+import DetailLine from "../components/DetailLine";
+
 import { useState } from "react";
 
 function Detail() {
@@ -47,71 +48,81 @@ function Detail() {
             position: "relative",
             bottom: "70px",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignItems: "center",
             flexDirection: "column",
           }}
         >
-          <p
-            style={{
-              font: "Raleway",
-              fontWeight: "800",
-              fontSize: "28px",
-              position: "absolute",
-              margin: 0,
-              top: "21px",
-              left: "24px",
-            }}
-          >
-            01/12
-          </p>
-          <p
-            style={{
-              color: "rgba(0, 0, 0, 0.8)",
-              font: "Raleway",
-              fontWeight: "700",
-              fontSize: "36px",
-              position: "absolute",
-              margin: 0,
-              top: "62px",
-              left: "24px",
-            }}
-          >
-            Niver do Gui
-          </p>
           <div
+            className="detail-header"
             style={{
-              position: "absolute",
-              margin: 0,
-              top: "29px",
-              right: "36px",
+              width: "100%",
+              height: "105px",
+              marginBottom: "23px",
             }}
           >
-            <div
+            <p
               style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
+                font: "Raleway",
+                fontWeight: "800",
+                fontSize: "28px",
+                position: "absolute",
+                margin: 0,
+                top: "21px",
+                left: "24px",
               }}
             >
-              <img
-                src={people}
-                style={{ height: "15.3px", marginRight: "12px" }}
-                alt="people logo"
-              />
-              <p
-                style={{
-                  margin: 0,
-                  font: "Raleway",
-                  fontWeight: "500",
-                  fontSize: "21px",
-                }}
-              >
-                15
-              </p>
-            </div>
+              01/12
+            </p>
+
+            <p
+              style={{
+                color: "rgba(0, 0, 0, 0.8)",
+                font: "Raleway",
+                fontWeight: "700",
+                fontSize: "36px",
+                position: "absolute",
+                margin: 0,
+                top: "62px",
+                left: "24px",
+              }}
+            >
+              Niver do Gui
+            </p>
 
             <div
+              style={{
+                position: "absolute",
+                margin: 0,
+                top: "29px",
+                right: "36px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src={people}
+                  style={{ height: "15.3px", marginRight: "12px" }}
+                  alt="people logo"
+                />
+                <p
+                  style={{
+                    margin: 0,
+                    font: "Raleway",
+                    fontWeight: "500",
+                    fontSize: "21px",
+                  }}
+                >
+                  15
+                </p>
+              </div>
+
+              <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -135,7 +146,19 @@ function Detail() {
                   R$150
                 </p>
               </div>
+            </div>
+          </div>
 
+          <div
+            className="detail-body"
+            style={{
+              width: "99%",
+              paddingLeft: "11px",
+            }}
+          >
+            <DetailLine name={"Lala"} value={"20,00"} checked={true} toggleChecked={() => {console.log("toggle checked")}} />
+            <DetailLine name={"Something"} value={"20,00"} checked={true} toggleChecked={() => {console.log("toggle checked")}} />
+            <DetailLine name={"More"} value={"20,00"} checked={false} toggleChecked={() => {console.log("toggle checked")}} />
           </div>
         </div>
       </div>
