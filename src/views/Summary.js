@@ -85,9 +85,7 @@ function Summary() {
           height: "30%",
           zIndex: "10",
         }}
-      >
-      </div>
-      
+      ></div>
       <div
         style={{
           background: "#FAFAFA",
@@ -101,7 +99,14 @@ function Summary() {
         }}
       >
         {eventList.map((event) => {
-          return <EventSummaryBlock date={event.date} title={event.title} numberOfPeople={event.people.length} value={getSumOfValuesWithoutDrink(event.people)}/>
+          return (
+            <EventSummaryBlock
+              date={event.date}
+              title={event.title}
+              numberOfPeople={event.people.length}
+              value={getSumOfValuesWithoutDrink(event.people)}
+            />
+          );
         })}
 
         <div
@@ -142,7 +147,6 @@ function Summary() {
           </p>
         </div>
       </div>
-      )}
     </div>
   );
 }
