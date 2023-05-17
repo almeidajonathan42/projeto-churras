@@ -4,68 +4,25 @@ import NewEventDialog from "../components/NewEventDialog";
 import { useState } from "react";
 
 function Summary() {
-  const [eventList, setEventList] = useState([
-    {
-      title: "Niver do Gui 2",
-      date: "01/12",
-      info: "Uma festa para o Guilherme",
-      people: [
-        {
-          name: "Alice",
-          valueWithDrink: 20,
-          valueWithoutDrink: 30,
-          checked: false,
-        },
-        {
-          name: "Beto",
-          valueWithDrink: 999,
-          valueWithoutDrink: 1000,
-          checked: false,
-        },
-        {
-          name: "Beto",
-          valueWithDrink: 999,
-          valueWithoutDrink: 1000,
-          checked: false,
-        },
-        {
-          name: "Diego",
-          valueWithDrink: 30,
-          valueWithoutDrink: 40,
-          checked: true,
-        },
-      ],
-    },
-    {
-      title: "Niver da Alana",
-      date: "01/12",
-      info: "Uma festa para a Alana",
-      people: [
-        {
-          name: "Alice",
-          valueWithDrink: 20,
-          valueWithoutDrink: 30,
-          checked: false,
-        },
-        {
-          name: "Beto",
-          valueWithDrink: 999,
-          valueWithoutDrink: 1000,
-          checked: false,
-        },
-        {
-          name: "Diego",
-          valueWithDrink: 30,
-          valueWithoutDrink: 40,
-          checked: true,
-        },
-      ],
-    },
-  ]);
+  const [eventList, setEventList] = useState([]);
   const [showNewEventDialog, setShowNewEventDialog] = useState(false);
 
-  const getSumOfValuesWithoutDrink = function (peopleArray) {
-    return "100";
+  const getSumOfValuesWithoutDrink = (peopleArray) => {
+    let sum = peopleArray.reduce((acc, person) => acc + parseInt(person.valueWithoutDrink), 0);
+    return sum;
+  };
+
+  const createNewEvent = (title, date, info, peopleArray) => {
+    setEventList((oldArray) => [
+      ...oldArray,
+      {
+        title: title,
+        date: date,
+        info: info,
+        people: peopleArray,
+      },
+    ]);
+    setShowNewEventDialog(false);
   };
 
   return (
@@ -79,7 +36,10 @@ function Summary() {
       }}
     >
       {showNewEventDialog && (
-        <NewEventDialog onClickOutside={() => setShowNewEventDialog(false)} />
+        <NewEventDialog
+          onClickOutside={() => setShowNewEventDialog(false)}
+          onCreateNewEvent={createNewEvent}
+        />
       )}
 
       <div

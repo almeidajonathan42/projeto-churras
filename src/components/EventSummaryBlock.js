@@ -15,6 +15,7 @@ function EventSummaryBlock(props) {
         margin: "12px",
         position: "relative",
         bottom: "70px",
+        cursor: "pointer"
       }}
     >
       <p
@@ -26,7 +27,7 @@ function EventSummaryBlock(props) {
           margin: 0,
         }}
       >
-        {props.date}
+        {('0' + props.date.getDate()).slice(-2)}/{('0' + (props.date.getMonth()+1)).slice(-2)}
       </p>
       <p
         style={{

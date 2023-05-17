@@ -1,24 +1,14 @@
-import bbqIconCircle from "../assets/bbqIconCircle.svg";
 import { useState } from "react";
 
 function NewEventDialog(props) {
   const [newPersonName, setNewPersonName] = useState("");
-  const [newPersonValueWithDrink, setNewPersonValueWithDrink] = useState(0);
-  const [newPersonValueWithoutDrink, setNewPersonValueWithoutDrink] = useState(0);
-  const [people, setPeople] = useState([
-    {
-      name: "Alice",
-      valueWithDrink: 20,
-      valueWithoutDrink: 30,
-      checked: false,
-    },
-    {
-      name: "Beto",
-      valueWithDrink: 999,
-      valueWithoutDrink: 1000,
-      checked: false,
-    },
-  ]);
+  const [newPersonValueWithDrink, setNewPersonValueWithDrink] = useState("");
+  const [newPersonValueWithoutDrink, setNewPersonValueWithoutDrink] =
+    useState("");
+  const [people, setPeople] = useState([]);
+  const [date, setDate] = useState(new Date());
+  const [title, setTitle] = useState("");
+  const [info, setInfo] = useState("");
 
   const addNewPerson = () => {
     setPeople((oldArray) => [
@@ -32,19 +22,19 @@ function NewEventDialog(props) {
     ]);
 
     setNewPersonName("");
-    setNewPersonValueWithDrink(0);
-    setNewPersonValueWithoutDrink(0);
+    setNewPersonValueWithDrink("");
+    setNewPersonValueWithoutDrink("");
   };
 
   const removePerson = (e) => {
     const indexToBeRemoved = e.target.getAttribute("data-key");
 
     let filteredPeople = people.filter((person, index) => {
-      return index != indexToBeRemoved
+      return index != indexToBeRemoved;
     });
 
     setPeople(filteredPeople);
-  }
+  };
 
   return (
     <div
@@ -128,7 +118,8 @@ function NewEventDialog(props) {
                   fontSize: "18px",
                 }}
                 type="date"
-                placeholder={"Aniversário de ..."}
+                value={date.toISOString().split("T")[0]}
+                onChange={(e) => setDate(new Date(`${e.target.value}T00:00`))}
               />
             </div>
 
@@ -166,6 +157,8 @@ function NewEventDialog(props) {
                 }}
                 type="text"
                 placeholder={"Aniversário de ..."}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
 
@@ -202,6 +195,8 @@ function NewEventDialog(props) {
                 }}
                 type="text"
                 placeholder={"Lembrar de ..."}
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
               />
             </div>
           </div>
@@ -403,6 +398,7 @@ function NewEventDialog(props) {
                     fontSize: "15px",
                   }}
                   type="number"
+                  placeholder={"20"}
                   value={newPersonValueWithoutDrink}
                   onChange={(e) =>
                     setNewPersonValueWithoutDrink(e.target.value)
@@ -438,6 +434,7 @@ function NewEventDialog(props) {
                     fontSize: "15px",
                   }}
                   type="number"
+                  placeholder={"30"}
                   value={newPersonValueWithDrink}
                   onChange={(e) => setNewPersonValueWithDrink(e.target.value)}
                 />
@@ -487,6 +484,13 @@ function NewEventDialog(props) {
           }}
           type="submit"
           value="Criar churras"
+          onClick={() => {
+            props.onCreateNewEvent(title, date, info, people);
+            setTitle("");
+            setDate(new Date());
+            setInfo("");
+            setPeople([]);
+          }}
         />
       </div>
     </div>
