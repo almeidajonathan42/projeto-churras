@@ -2,6 +2,9 @@ import bbqIconCircle from "../assets/bbqIconCircle.svg";
 import { useState } from "react";
 
 function NewEventDialog(props) {
+  const [newPersonName, setNewPersonName] = useState("");
+  const [newPersonValueWithDrink, setNewPersonValueWithDrink] = useState(0);
+  const [newPersonValueWithoutDrink, setNewPersonValueWithoutDrink] = useState(0);
   const [people, setPeople] = useState([
     {
       name: "Alice",
@@ -15,19 +18,33 @@ function NewEventDialog(props) {
       valueWithoutDrink: 1000,
       checked: false,
     },
-    {
-      name: "Beto",
-      valueWithDrink: 999,
-      valueWithoutDrink: 1000,
-      checked: false,
-    },
-    {
-      name: "Diego",
-      valueWithDrink: 30,
-      valueWithoutDrink: 40,
-      checked: true,
-    },
   ]);
+
+  const addNewPerson = () => {
+    setPeople((oldArray) => [
+      ...oldArray,
+      {
+        name: newPersonName ? newPersonName : "Sem nome",
+        valueWithDrink: newPersonValueWithDrink,
+        valueWithoutDrink: newPersonValueWithoutDrink,
+        checked: false,
+      },
+    ]);
+
+    setNewPersonName("");
+    setNewPersonValueWithDrink(0);
+    setNewPersonValueWithoutDrink(0);
+  };
+
+  const removePerson = (e) => {
+    const indexToBeRemoved = e.target.getAttribute("data-key");
+
+    let filteredPeople = people.filter((person, index) => {
+      return index != indexToBeRemoved
+    });
+
+    setPeople(filteredPeople);
+  }
 
   return (
     <div
@@ -56,7 +73,6 @@ function NewEventDialog(props) {
           flexDirection: "column",
         }}
         onClick={(e) => {
-          console.log("Nothing should happen");
           e.stopPropagation();
         }}
       >
@@ -214,13 +230,14 @@ function NewEventDialog(props) {
             <div
               style={{
                 display: "flex",
-                alignItems: "center",
-                justifyContent: people.lenght == 0 ? "center" : "flex-start",
+                flexDirection: "column",
+                alignItems: people.length === 0 ? "center" : "flex-start",
+                justifyContent: people.length === 0 ? "center" : "flex-start",
                 height: "200px",
-                overflow: "scroll",
+                overflowY: "auto",
               }}
             >
-              {people.length == 0 && (
+              {people.length === 0 && (
                 <p
                   style={{
                     color: "rgba(0, 0, 0, 0.4)",
@@ -232,20 +249,87 @@ function NewEventDialog(props) {
                 </p>
               )}
 
-              {people.map((person) => {
-                return (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <p> {person.name} </p>
-                    <p> {person.valueWithDrink} </p>
-                    <p> {person.valueWithoutDrink} </p>
-                  </div>
-                );
-              })}
+              {people.length > 0 && (
+                <table
+                  style={{
+                    color: "rgba(0, 0, 0, 0.9)",
+                    fontSize: "15px",
+                    width: "100%",
+                  }}
+                >
+                  <thead>
+                    <tr>
+                      <th
+                        style={{
+                          textAlign: "initial",
+                        }}
+                      >
+                        Nome
+                      </th>
+                      <th
+                        style={{
+                          textAlign: "initial",
+                        }}
+                      >
+                        Sem bebida
+                      </th>
+                      <th
+                        style={{
+                          textAlign: "initial",
+                        }}
+                      >
+                        Com bebida
+                      </th>
+                      <th></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {people.map((person, index) => {
+                      return (
+                        <tr key={index}>
+                          <td
+                            style={{
+                              width: "25%",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {person.name}
+                          </td>
+                          <td
+                            style={{
+                              width: "25%",
+                              fontWeight: "400",
+                            }}
+                          >
+                            R${person.valueWithoutDrink}
+                          </td>
+                          <td
+                            style={{
+                              width: "25%",
+                              fontWeight: "400",
+                            }}
+                          >
+                            R${person.valueWithDrink}
+                          </td>
+                          <td
+                            data-key={index}
+                            style={{
+                              width: "25%",
+                              fontWeight: "700",
+                              color: "red",
+                              cursor: "pointer",
+                            }}
+                            onClick={removePerson}
+                          >
+                            Excluir
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              )}
             </div>
 
             <div
@@ -285,6 +369,8 @@ function NewEventDialog(props) {
                   }}
                   type="text"
                   placeholder={"Márcia"}
+                  value={newPersonName}
+                  onChange={(e) => setNewPersonName(e.target.value)}
                 />
               </div>
               <div
@@ -317,7 +403,10 @@ function NewEventDialog(props) {
                     fontSize: "15px",
                   }}
                   type="number"
-                  placeholder={"20"}
+                  value={newPersonValueWithoutDrink}
+                  onChange={(e) =>
+                    setNewPersonValueWithoutDrink(e.target.value)
+                  }
                 />
               </div>
               <div
@@ -349,7 +438,8 @@ function NewEventDialog(props) {
                     fontSize: "15px",
                   }}
                   type="number"
-                  placeholder={"30"}
+                  value={newPersonValueWithDrink}
+                  onChange={(e) => setNewPersonValueWithDrink(e.target.value)}
                 />
               </div>
             </div>
@@ -369,12 +459,14 @@ function NewEventDialog(props) {
                   height: "40px",
                   background: "#000000",
                   boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.06)",
-                  borderRadius: "18px",
+                  borderRadius: "4px",
                   marginTop: "10px",
-                  fontWeight: "400"
+                  fontWeight: "400",
+                  cursor: "pointer",
                 }}
-                type="submit"
+                type="button"
                 value="Adicionar participante"
+                onClick={addNewPerson}
               />
             </div>
           </div>
