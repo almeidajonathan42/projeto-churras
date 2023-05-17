@@ -1,5 +1,6 @@
 import bbqIconCircle from "../assets/bbqIconCircle.svg";
 import EventSummaryBlock from "../components/EventSummaryBlock";
+import NewEventDialog from "../components/NewEventDialog";
 import { useState } from "react";
 
 function Summary() {
@@ -77,6 +78,10 @@ function Summary() {
         zIndex: "10",
       }}
     >
+      {showNewEventDialog && (
+        <NewEventDialog onClickOutside={() => setShowNewEventDialog(false)} />
+      )}
+
       <div
         style={{
           width: "100%",
