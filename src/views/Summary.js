@@ -101,9 +101,10 @@ function Summary() {
           zIndex: "10",
         }}
       >
-        {eventList.map((event) => {
+        {eventList.map((event, index) => {
           return (
             <EventSummaryBlock
+              key={index}
               date={event.date}
               title={event.title}
               numberOfPeople={event.people.length}
