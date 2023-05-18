@@ -1,7 +1,7 @@
 import logo from "../assets/logo.svg";
 import InputField from "../components/InputField";
 
-function Login() {
+function Login(props) {
   return (
     <div
       style={{
@@ -38,8 +38,9 @@ function Login() {
             borderRadius: "18px",
             marginTop: "74px",
           }}
-          type="submit"
+          type="button"
           value="Entrar"
+          onClick={props.onLogin}
         />
       </form>
     </div>
