@@ -20,6 +20,7 @@ function Detail(props) {
       <div
         style={{
           width: "100%",
+          height: "fit-content",
           background: "#FFFFFF",
           boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.06)",
           borderRadius: "2px",
