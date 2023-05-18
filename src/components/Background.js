@@ -43,7 +43,7 @@ function Background(props) {
         src={logo}
         style={{
           height: "50px",
-          position: "absolute",
+          position: "fixed",
           bottom: "28px",
           zIndex: "20",
         }}
