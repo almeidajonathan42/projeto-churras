@@ -51,7 +51,6 @@ function NewEventDialog(props) {
         justifyContent: "center",
         alignItems: "center",
       }}
-      onClick={props.onClickOutside}
     >
       <div
         style={{
@@ -61,11 +60,24 @@ function NewEventDialog(props) {
           padding: "20px",
           display: "flex",
           flexDirection: "column",
+          position: "relative",
         }}
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
+        <p
+          style={{
+            position: "absolute",
+            right: "20px",
+            fontWeight: "700",
+            cursor: "pointer",
+          }}
+          onClick={props.onClose}
+        >
+          X
+        </p>
+
         <p
           style={{
             margin: "0 0 30px 0",

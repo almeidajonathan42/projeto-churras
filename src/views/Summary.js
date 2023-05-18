@@ -42,7 +42,7 @@ function Summary() {
     >
       {showNewEventDialog && (
         <NewEventDialog
-          onClickOutside={() => setShowNewEventDialog(false)}
+          onClose={() => setShowNewEventDialog(false)}
           onCreateNewEvent={createNewEvent}
         />
       )}
