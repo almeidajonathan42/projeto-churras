@@ -160,6 +160,7 @@ function Detail(props) {
           {props.people.map((person, index) => {
             return (
               <DetailLine
+                key={index}
                 name={person.name}
                 value={person.valueWithoutDrink}
                 checked={person.checked}
