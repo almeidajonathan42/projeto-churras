@@ -54,35 +54,53 @@ function Summary() {
           zIndex: "10",
         }}
       ></div>
-      <div
-        style={{
-          background: "#FAFAFA",
-          width: "100%",
-          height: "70%",
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          zIndex: "10",
-        }}
-      >
-        {eventList.map((event, index) => {
-          return (
-            <EventSummaryBlock
-              key={index}
-              date={event.date}
-              title={event.title}
-              numberOfPeople={event.people.length}
-              value={getSumOfValuesWithoutDrink(event.people)}
-              onClick={() => {
-                setSelectedEvent(index);
-              }}
-            />
-          );
-        })}
 
-        <NewEventBlock onClick={() => setShowNewEventDialog(true)} />
-      </div>
+      {selectedEvent === null ? (
+        <div
+          style={{
+            background: "#FAFAFA",
+            width: "100%",
+            height: "70%",
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            zIndex: "10",
+          }}
+        >
+          {eventList.map((event, index) => {
+            return (
+              <EventSummaryBlock
+                key={index}
+                date={event.date}
+                title={event.title}
+                numberOfPeople={event.people.length}
+                value={getSumOfValuesWithoutDrink(event.people)}
+                onClick={() => {
+                  setSelectedEvent(index);
+                }}
+              />
+            );
+          })}
+
+          <NewEventBlock onClick={() => setShowNewEventDialog(true)} />
+        </div>
+      ) : (
+        <Detail
+          date={eventList[selectedEvent].date}
+          title={eventList[selectedEvent].title}
+          people={eventList[selectedEvent].people}
+          onTogglePersonChecked={(index) => {
+            let _eventList = eventList.slice();
+            _eventList[selectedEvent].people[index].checked = !_eventList[selectedEvent].people[index].checked;
+            setEventList(_eventList);
+          }}
+          value={getSumOfValuesWithoutDrink(eventList[selectedEvent].people)}
+          onClickBack={() => {
+            setSelectedEvent(null);
+          }}
+        />
+      )}
     </div>
   );
 }
