@@ -1,14 +1,19 @@
-import bbqIconCircle from "../assets/bbqIconCircle.svg";
 import EventSummaryBlock from "../components/EventSummaryBlock";
 import NewEventDialog from "../components/NewEventDialog";
 import { useState } from "react";
+import Detail from "./Detail";
+import NewEventBlock from "../components/NewEventBlock";
 
 function Summary() {
   const [eventList, setEventList] = useState([]);
   const [showNewEventDialog, setShowNewEventDialog] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const getSumOfValuesWithoutDrink = (peopleArray) => {
-    let sum = peopleArray.reduce((acc, person) => acc + parseInt(person.valueWithoutDrink), 0);
+    let sum = peopleArray.reduce(
+      (acc, person) => acc + parseInt(person.valueWithoutDrink),
+      0
+    );
     return sum;
   };
 
@@ -69,47 +74,14 @@ function Summary() {
               title={event.title}
               numberOfPeople={event.people.length}
               value={getSumOfValuesWithoutDrink(event.people)}
+              onClick={() => {
+                setSelectedEvent(index);
+              }}
             />
           );
         })}
 
-        <div
-          style={{
-            width: "282px",
-            height: "192px",
-            background: "#F1F1F1",
-            boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.06)",
-            borderRadius: "2px",
-            padding: "21px 24px 32px 24px",
-            margin: "12px 0 12px 12px",
-            position: "relative",
-            bottom: "70px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            cursor: "pointer",
-          }}
-          onClick={() => setShowNewEventDialog(true)}
-        >
-          <img
-            src={bbqIconCircle}
-            style={{ height: "90px", marginBottom: "8px" }}
-            alt="barbecue icon"
-          />
-
-          <p
-            style={{
-              font: "Raleway",
-              fontWeight: "700",
-              fontSize: "21px",
-              color: "#000000",
-              margin: 0,
-            }}
-          >
-            Adicionar Churras
-          </p>
-        </div>
+        <NewEventBlock onClick={() => setShowNewEventDialog(true)} />
       </div>
     </div>
   );

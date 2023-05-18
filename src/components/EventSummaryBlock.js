@@ -17,6 +17,7 @@ function EventSummaryBlock(props) {
         bottom: "70px",
         cursor: "pointer"
       }}
+      onClick={props.onClick}
     >
       <p
         style={{
