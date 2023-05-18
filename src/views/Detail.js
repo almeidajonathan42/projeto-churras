@@ -155,19 +155,37 @@ function Detail(props) {
           style={{
             width: "99%",
             paddingLeft: "11px",
+            display: props.people.length === 0 ? "flex" : "",
+            flexDirection: props.people.length === 0 ? "column" : "",
+            alignItems: props.people.length === 0 ? "center" : "flex-start",
+            justifyContent: props.people.length === 0 ? "center" : "flex-start",
           }}
         >
-          {props.people.map((person, index) => {
-            return (
-              <DetailLine
-                key={index}
-                name={person.name}
-                value={person.valueWithoutDrink}
-                checked={person.checked}
-                toggleChecked={() => props.onTogglePersonChecked(index)}
-              />
-            );
-          })}
+          {props.people.length === 0 ? (
+            <p
+              style={{
+                color: "rgba(0, 0, 0, 0.4)",
+                fontSize: "18px",
+                fontStyle: "italic",
+              }}
+            >
+              Não há participantes :(
+            </p>
+          ) : (
+            <>
+              {props.people.map((person, index) => {
+                return (
+                  <DetailLine
+                    key={index}
+                    name={person.name}
+                    value={person.valueWithoutDrink}
+                    checked={person.checked}
+                    toggleChecked={() => props.onTogglePersonChecked(index)}
+                  />
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     </div>
