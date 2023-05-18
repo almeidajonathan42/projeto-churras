@@ -50,7 +50,7 @@ function DetailLine(props) {
           userSelect: "none"
         }}
       >
-        R$ {props.value}
+        R${props.value},00
       </p>
     </div>
   );
